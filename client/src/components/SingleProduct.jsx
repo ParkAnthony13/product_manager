@@ -21,9 +21,10 @@ const SingleProduct = props => {
         <div>
             {oneProduct 
             ? <div>
-                <h3>{oneProduct.product[0].title}</h3>
-                <p>Price: ${oneProduct.product[0].price}</p>
-                <p>Description: {oneProduct.product[0].description}</p>
+                <h3>{oneProduct.product.title}</h3>
+                <p>Price: ${oneProduct.product.price}</p>
+                <p>Description: {oneProduct.product.description}</p>
+                <Link to={`/product/${id}/edit`}>Edit</Link>
             </div>
             : null}
         </div>

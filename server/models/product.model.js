@@ -8,7 +8,8 @@ const ProductSchema = mongoose.Schema({
     },
     price: {
         type: Number,
-        min: [0, "PRICE MUST BE EQUAL TO OR GREATER THAN $0"]
+        required:[true,"PRICE REQUIRED"],
+        min: [0.01, "PRICE MUST BE EQUAL TO OR GREATER THAN $0"]
     },
     description: {
         type: String,
