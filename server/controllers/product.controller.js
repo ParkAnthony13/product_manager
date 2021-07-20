@@ -8,7 +8,7 @@ module.exports.test = (req, res) => {
 
 module.exports.getAllProducts = (req, res) => {
     Product.find()
-        .then(allProducts => res.json({products: allProducts}))
+        .then(allProducts => res.json({allProducts}))
         .catch(err => res.json({err}))
 }
 
@@ -20,4 +20,10 @@ module.exports.createProduct = (req,res) => {
             console.log(err)
             console.log({err})
         })
+}
+
+module.exports.getOneProduct = (req, res) => {
+    Product.find({_id:req.params.id})
+        .then(oneProduct => res.json({product:oneProduct}))
+        .catch(err => res.json({err}))
 }
