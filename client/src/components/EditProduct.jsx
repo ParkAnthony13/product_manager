@@ -5,6 +5,7 @@ import axios from "axios"
 const EditProduct = props => {
     const[callToggle,setCallToggle] = useState(true)
     const[oneProduct,setOneProduct] = useState("")
+    const[errorList,setErrorList] = useState([])
     const[formState,setFormState] = useState({
         title:"",
         price:0,
@@ -29,7 +30,12 @@ const EditProduct = props => {
             console.log(res)
             navigate("/")
         })
-        .catch(err => console.log(`Encountered Error: ${err}`))
+        .catch(err => {
+            console.log(`Encountered Error: ${err}`)
+            console.log(err.response.data)
+            const {errors} = err.response.data
+            setErrorList(errors)
+        })
     }
 
     const handleClick = (e) => {
@@ -60,10 +66,13 @@ const EditProduct = props => {
                     <div style={{display:"flex",flexDirection:"column",width:"30%",margin:"auto",padding:"5px"}}>
                         <label>Title:</label>
                         <input type="text" onChange={handleChange} name="title" placeHolder={oneProduct.product.title} style={{textAlign:"center",height:"20px",margin:"5px"}}/>
+                        {errorList.title ? <p style={{color:"red"}}>{errorList.title.message}</p> : null}
                         <label>Price:</label>
                         <input type="number" name="price" onChange={handleChange} placeHolder={oneProduct.product.price} style={{textAlign:"center",height:"20px",margin:"5px"}}/>
+                        {errorList.price ? <p style={{color:"red"}}>{errorList.price.message}</p> : null}
                         <label>Title:</label>
                         <input type="text" name="description" onChange={handleChange} placeHolder={oneProduct.product.description} style={{textAlign:"center",height:"20px",margin:"5px"}}/>
+                        {errorList.description ? <p style={{color:"red"}}>{errorList.description.message}</p> : null}
                         <input type="submit" value="Edit"/>
                     </div>
                 </form>
